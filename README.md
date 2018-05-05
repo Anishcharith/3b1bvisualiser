@@ -9,3 +9,4 @@ __Note__ : The audio has to be single channel and in wav format.
 ` python visualiser.py audiofilename `  
 ` ./make audiofilename `
 
+3. The frames will be generated in __samples__ directory and the video will be present in __video_output__
