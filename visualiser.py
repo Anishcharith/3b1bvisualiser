@@ -73,8 +73,8 @@ def plotbars(data,filename):
     plt.close()
 
 def saveFig(data,filename):
-    #plt.matshow(data,fignum=False,cmap='binary',vmin=0,vmax=1)
-    plt.matshow(data,fignum=False,cmap='binary',vmin=0)
+    plt.matshow(data,fignum=False,cmap='binary',vmin=0,vmax=1)
+    #plt.matshow(data,fignum=False,cmap='binary',vmin=0)
     #plt.axis('off')
     plt.tick_params(
     bottom='off',      # ticks along the bottom edge are off
@@ -94,10 +94,10 @@ def modFig(data,filename):
     fig = plt.figure(figsize=(8,8),tight_layout=False) # Notice the equal aspect ratio
     ax = [fig.add_subplot(2,2,i+1) for i in range(4)]
     
-    ax[0].matshow([i[::-1] for i in data[::-1]],cmap='Blues',vmin=0)
-    ax[1].matshow(data,cmap='Blues',origin='lower',vmin=0)
-    ax[2].matshow([i[::-1] for i in data[::-1]],origin='lower',cmap='Blues',vmin=0)
-    ax[3].matshow(data,cmap='Blues',vmin=0)
+    ax[0].matshow([i[::-1] for i in data[::-1]],cmap='YlOrBr',vmin=0,vmax=1)
+    ax[1].matshow(data,cmap='Blues',origin='lower',vmin=0,vmax=1)
+    ax[2].matshow([i[::-1] for i in data[::-1]],origin='lower',cmap='Blues',vmin=0,vmax=1)
+    ax[3].matshow(data,cmap='Blues',vmin=0,vmax=1)
     for a in ax:
         a.set_xticklabels([])
         a.set_yticklabels([])
@@ -140,18 +140,16 @@ for offset in range(total_frames):
     fft_data=abs(fft.fft(sample_range))
     freqs = fft.fftfreq(len(fft_data))
     fft_data=fft_data[:int(len(fft_data)/4)]
-    #fft_data=fft_data/totenergy
+    fft_data=fft_data/totenergy
     freqs=freqs[:int(len(freqs)/4)]
     ###############         hilbertcurve
     m=HilbertMapping(freqs,fft_data,4)  # change order of hilbert curve here
-    m[0][0]=0
     modFig(m,savesamples+'/frame_'+str(offset).zfill(5))
     #saveFig(m,savesamples+'/frame_'+str(offset).zfill(5))
     ###############
     """
     ###############         not hilbert
     m=bins(freqs,fft_data,4)
-    m[0][0]=0
     plotbars(m,savesamples+'/frame_'+str(offset).zfill(5))
     ##############         
     """
