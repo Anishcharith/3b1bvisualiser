@@ -144,12 +144,14 @@ for offset in range(total_frames):
     freqs=freqs[:int(len(freqs)/4)]
     ###############         hilbertcurve
     m=HilbertMapping(freqs,fft_data,4)  # change order of hilbert curve here
+    m[0][0]=0
     modFig(m,savesamples+'/frame_'+str(offset).zfill(5))
     #saveFig(m,savesamples+'/frame_'+str(offset).zfill(5))
     ###############
     """
     ###############         not hilbert
     m=bins(freqs,fft_data,4)
+    m[0][0]=0
     plotbars(m,savesamples+'/frame_'+str(offset).zfill(5))
     ##############         
     """
